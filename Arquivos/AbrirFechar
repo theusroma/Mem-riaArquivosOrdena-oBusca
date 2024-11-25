@@ -1,0 +1,25 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+int main() {
+    FILE *f;
+
+    // Tenta abrir o arquivo no modo escrita (w)     //para abir o formato no modo leitura, usaria se (r)
+    f = fopen("Abrir&Fechar.txt", "w");
+
+    // Verifica se houve erro na abertura
+    if (f == NULL) {
+        printf("Erro na abertura do arquivo\n");
+        return 1; // Encerra o programa com código de erro
+    }
+
+    // Escrevendo no arquivo
+    fprintf(f, "Essa gravação foi feita através do uso de FPRINTF\n");
+
+    // Fecha o arquivo
+    fclose(f);
+
+    printf("Operação concluída com sucesso!\n");
+
+    return 0;
+}
