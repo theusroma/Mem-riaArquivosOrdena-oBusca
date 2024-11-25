@@ -1,0 +1,54 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Função para ordenar um vetor usando o Bubble Sort
+// NÃO RECOMENDADO PARA GRANDES CONJUNTOS DE DADOS
+//Melhor Caso: O(N)
+//Pior caso: O(N²)
+//Para pequenos conjuntos: Pode ser adequado, mas há opções mais eficientes.
+//Para grandes conjuntos: Ineficiente, devido à complexidade quadrática, sendo preferível usar algoritmos como Merge Sort ou Quick Sort, que têm complexidade O(N log N).
+
+
+void bubblesort(int *V, int N) {
+    int i, continua, aux, fim = N; // Declaração de variáveis locais
+    do {
+        continua = 0; // Inicializa o sinalizador como "nenhuma troca realizada"
+        for (i = 0; i < fim - 1; i++) { // Percorre os elementos do vetor
+            if (V[i] > V[i + 1]) { // Verifica se o elemento atual é maior que o próximo
+                aux = V[i];        // Armazena o valor de V[i] em uma variável temporária
+                V[i] = V[i + 1];   // Substitui V[i] pelo valor de V[i+1]
+                V[i + 1] = aux;    // Substitui V[i+1] pelo valor original de V[i]
+                continua = 1;      // Marca que houve uma troca
+            }
+        }
+        fim--; // Reduz o limite do vetor, pois o último elemento já está no lugar correto
+    } while (continua != 0); // Repete enquanto houver trocas (sinalizador 'continua' diferente de zero)
+}
+
+int main() {
+    // Mensagem inicial
+    printf("bom dia familia");
+
+    // Define um vetor desordenado
+    int vetor[] = {5, 3, 8, 6, 2};
+    int tamanho = sizeof(vetor) / sizeof(vetor[0]); // Calcula o tamanho do vetor
+    int i; // Variável para iterar nos loops
+
+    // Exibe o vetor antes da ordenação
+    printf("\nVetor antes da ordenação: ");
+    for (i = 0; i < tamanho; i++) {
+        printf("%d ", vetor[i]); // Imprime os elementos do vetor, separados por espaços
+    }
+
+    // Ordena o vetor usando a função bubblesort
+    bubblesort(vetor, tamanho);
+
+    // Exibe o vetor depois da ordenação
+    printf("\nVetor depois da ordenação: ");
+    for (i = 0; i < tamanho; i++) {
+        printf("%d ", vetor[i]); // Imprime os elementos do vetor ordenado
+    }
+
+    // Finaliza o programa
+    return 0;
+}
