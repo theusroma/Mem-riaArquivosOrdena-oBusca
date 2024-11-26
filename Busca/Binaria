@@ -1,0 +1,48 @@
+#include <stdio.h>
+
+//LISTA BINARIA SO FUNCIONA COM CODIGO ORDENADO
+
+// Função de busca binária
+int buscaBinaria(int *lista, int inicio, int fim, int chave) {
+    while (inicio <= fim) {
+        int meio = inicio + (fim - inicio) / 2;
+        
+        if (lista[meio] == chave) {
+            return meio;  // Retorna o índice se encontrar a chave
+        } else if (lista[meio] > chave) {
+            fim = meio - 1;  // Busca na metade inferior
+        } else {
+            inicio = meio + 1;  // Busca na metade superior
+        }
+    }
+    return -1;  // Retorna -1 se não encontrar o número
+}
+
+int main() {
+    // Array já ordenado para realizar a busca binária
+    int numeros[10] = {2, 5, 7, 12, 15, 22, 34, 50, 62, 75};
+    int buscado, i, resultado;
+    
+    // Exibe o array para o usuário
+    printf("Array: ");
+    for (i = 0; i < 10; i++) {
+        printf("%d ", numeros[i]);
+    }
+    printf("\n");
+    
+    // Solicita ao usuário o número a ser buscado
+    printf("Digite o numero que deseja buscar: ");
+    scanf("%d", &buscado);
+    
+    // Realiza a busca binária
+    resultado = buscaBinaria(numeros, 0, 9, buscado);  // O tamanho do array é 10, então "fim" é 9
+    
+    // Exibe o resultado da busca
+    if (resultado != -1) {
+        printf("O elemento %d foi encontrado no indice %d.\n", buscado, resultado);
+    } else {
+        printf("O elemento %d nao foi encontrado na lista.\n", buscado);
+    }
+
+    return 0;
+}
