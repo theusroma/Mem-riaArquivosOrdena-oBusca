@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 // Função que realiza o Quick Sort
 void quickSort(int *lista, int inicio, int fim) {
@@ -52,28 +53,33 @@ int buscaBinaria(int *lista, int inicio, int fim, int chave) {
 }
 
 int main() {
-    // Array não ordenado
+    // Inicializa o gerador de números aleatórios
+    srand(time(NULL));
+    
+    // Declarações
     int numeros[100];
     int buscado, i, resultado;
 
-    // Exibe o array antes de ordenar
-   for(i = 0; i < 100; i++){
-		numeros[i] = rand() %101;
-		printf("Indice: [%d] Numero:[%d]\n", i,numeros[i]);
-	}
+    // Preenche o array com números aleatórios e exibe antes da ordenação
+    printf("Array antes da ordenacao:\n");
+    for (i = 0; i < 100; i++) {
+        numeros[i] = rand() % 101;  // Números aleatórios entre 0 e 100
+        printf("%d ", numeros[i]);
+    }
+    printf("\n");
 
     // Ordena o array usando Quick Sort
     quickSort(numeros, 0, 99);
 
     // Exibe o array após ordenação
-    printf("Array apos ordenacao:\n ");
+    printf("\nArray apos ordenacao:\n");
     for (i = 0; i < 100; i++) {
-        printf("%d \n", numeros[i]);
+        printf("%d ", numeros[i]);
     }
     printf("\n");
 
     // Solicita ao usuário o número a ser buscado
-    printf("Digite o numero que deseja buscar: ");
+    printf("\nDigite o numero que deseja buscar: ");
     scanf("%d", &buscado);
 
     // Realiza a busca binária
