@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Função que realiza o Quick Sort
+void quickSort(int *lista, int inicio, int fim) {
+    if (inicio < fim) {
+        int pivo = particiona(lista, inicio, fim);  // Encontra o índice do pivo
+        quickSort(lista, inicio, pivo - 1);  // Ordena a parte esquerda do pivo
+        quickSort(lista, pivo + 1, fim);    // Ordena a parte direita do pivo
+    }
+}
+
+// Função que realiza a partição do array no Quick Sort
+int particiona(int *lista, int inicio, int fim) {
+    int pivo = lista[fim];  // O último elemento é escolhido como pivo
+    int i = (inicio - 1);  // Índice do menor elemento
+    int j;
+    
+    // Percorre o array e organiza os elementos menores que o pivo à esquerda
+    // e os maiores à direita
+    for (j = inicio; j < fim; j++) {
+        if (lista[j] <= pivo) {
+            i++;
+            int temp = lista[i];
+            lista[i] = lista[j];
+            lista[j] = temp;
+        }
+    }
+    
+    // Coloca o pivo na posição correta
+    int temp = lista[i + 1];
+    lista[i + 1] = lista[fim];
+    lista[fim] = temp;
+    
+    return i + 1;  // Retorna o índice do pivo
+}
+
+// Função de busca binária
+int buscaBinaria(int *lista, int inicio, int fim, int chave) {
+    while (inicio <= fim) {
+        int meio = inicio + (fim - inicio) / 2;
+        
+        if (lista[meio] == chave) {
+            return meio;  // Retorna o índice se encontrar a chave
+        } else if (lista[meio] > chave) {
+            fim = meio - 1;  // Busca na metade inferior
+        } else {
+            inicio = meio + 1;  // Busca na metade superior
+        }
+    }
+    return -1;  // Retorna -1 se não encontrar a chave
+}
+
+int main() {
+    // Array não ordenado
+    int numeros[100];
+    int buscado, i, resultado;
+
+    // Exibe o array antes de ordenar
+   for(i = 0; i < 100; i++){
+		numeros[i] = rand() %101;
+		printf("Indice: [%d] Numero:[%d]\n", i,numeros[i]);
+	}
+
+    // Ordena o array usando Quick Sort
+    quickSort(numeros, 0, 99);
+
+    // Exibe o array após ordenação
+    printf("Array apos ordenacao:\n ");
+    for (i = 0; i < 100; i++) {
+        printf("%d \n", numeros[i]);
+    }
+    printf("\n");
+
+    // Solicita ao usuário o número a ser buscado
+    printf("Digite o numero que deseja buscar: ");
+    scanf("%d", &buscado);
+
+    // Realiza a busca binária
+    resultado = buscaBinaria(numeros, 0, 99, buscado);
+
+    // Exibe o resultado da busca
+    if (resultado != -1) {
+        printf("O elemento %d foi encontrado no indice %d.\n", buscado, resultado);
+    } else {
+        printf("O elemento %d nao foi encontrado na lista.\n", buscado);
+    }
+
+    return 0;
+}
