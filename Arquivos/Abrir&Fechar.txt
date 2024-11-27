@@ -1,4 +1,0 @@
-Essa gravação foi feita através do uso de FPRINTF
-
-
-fprintf(f, "Essa gravação foi feita através do uso de FPRINTF\n");

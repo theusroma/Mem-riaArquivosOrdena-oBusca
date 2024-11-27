@@ -1,1 +1,0 @@
-Estes dados foram lidos através do uso de FGETC

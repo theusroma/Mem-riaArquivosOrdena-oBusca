@@ -1,1 +1,0 @@
-Estou gravando dados no arquissvo usando FPUTS
