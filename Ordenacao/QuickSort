@@ -1,0 +1,74 @@
+#include <stdio.h>
+
+
+//Melhor caso:
+//O(n log n) – quando o pivô divide o array em partes quase iguais.
+
+//Pior caso:
+//O(n²) – ocorre com divisões desbalanceadas (ex.: pivô é o maior ou menor elemento).
+
+//Rápido para grandes conjuntos desordenados, mas menos eficiente em arrays pequenos ou já ordenados.
+
+// Função para particionar o array
+int particiona(int *V, int inicio, int fim) {
+    int esq = inicio, dir = fim; // Define os limites esquerdo e direito
+    int pivo = V[inicio];        // Escolhe o primeiro elemento como pivô
+    int aux;
+
+    while (esq < dir) { // Enquanto os índices não se cruzarem
+        // Move o índice esquerdo para a direita enquanto os elementos forem menores ou iguais ao pivô
+        while (V[esq] <= pivo && esq < fim) {
+            esq++;
+        }
+
+        // Move o índice direito para a esquerda enquanto os elementos forem maiores que o pivô
+        while (V[dir] > pivo) {
+            dir--;
+        }
+
+        // Se os índices ainda não se cruzaram, troca os elementos
+        if (esq < dir) {
+            aux = V[esq];
+            V[esq] = V[dir];
+            V[dir] = aux;
+        }
+    }
+
+    // Coloca o pivô na posição correta (entre os menores à esquerda e os maiores à direita)
+    V[inicio] = V[dir];
+    V[dir] = pivo;
+
+    return dir; // Retorna a posição final do pivô
+}
+
+// Função principal do Quick Sort
+void quickSort(int *V, int inicio, int fim) {
+    if (inicio < fim) { // Verifica se ainda há elementos para ordenar
+        int pivo = particiona(V, inicio, fim); // Particiona o array e obtém a posição do pivô
+        quickSort(V, inicio, pivo - 1);        // Ordena a parte esquerda do pivô
+        quickSort(V, pivo + 1, fim);           // Ordena a parte direita do pivô
+    }
+}
+
+int main() {
+    int V[] = {10, 7, 8, 9, 1, 5}; // Array de exemplo
+    int tamanho = sizeof(V) / sizeof(V[0]); // Calcula o tamanho do array
+    int i;
+
+    // Exibe o array antes da ordenação
+    printf("Array antes da ordenacao:\n");
+    for (i = 0; i < tamanho; i++) {
+        printf("%d ", V[i]);
+    }
+
+    // Chama o Quick Sort para ordenar o array
+    quickSort(V, 0, tamanho - 1);
+
+    // Exibe o array depois da ordenação
+    printf("\nArray depois da ordenacao:\n");
+    for (i = 0; i < tamanho; i++) {
+        printf("%d ", V[i]);
+    }
+
+    return 0;
+}
